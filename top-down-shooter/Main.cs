@@ -1,7 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿#region Includes
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using top_down_shooter;
+using Microsoft.Xna.Framework.Media;
+#endregion
 
 namespace top_down_shooter
 {
@@ -12,6 +20,8 @@ namespace top_down_shooter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        World world;
 
         public Main()
         {
@@ -42,7 +52,8 @@ namespace top_down_shooter
             Globals.content = this.Content;
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+           // TODO: use this.Content to load your game content here
+           world = new World();
         }
 
         /// <summary>
@@ -65,6 +76,7 @@ namespace top_down_shooter
                 Exit();
 
             // TODO: Add your update logic here
+            world.Update();
 
             base.Update(gameTime);
         }
@@ -80,7 +92,7 @@ namespace top_down_shooter
             // TODO: Add your drawing code here
 
             Globals.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-
+            world.Draw();
 
             Globals.spriteBatch.End();
 
