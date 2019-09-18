@@ -16,5 +16,6 @@ namespace top_down_shooter
     {
         public static ContentManager content;
         public static SpriteBatch spriteBatch;
+        public static McKeyboard keyboard;
     }
 }

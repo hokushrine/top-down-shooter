@@ -52,7 +52,8 @@ namespace top_down_shooter
             Globals.content = this.Content;
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
 
-           // TODO: use this.Content to load your game content here
+            // TODO: use this.Content to load your game content here
+            Globals.keyboard = new McKeyboard();
            world = new World();
         }
 
@@ -76,7 +77,9 @@ namespace top_down_shooter
                 Exit();
 
             // TODO: Add your update logic here
+            Globals.keyboard.Update();
             world.Update();
+            Globals.keyboard.UpdateOld();
 
             base.Update(gameTime);
         }
