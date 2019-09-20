@@ -15,6 +15,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace top_down_shooter
 {
+    public delegate void PassObject(object i);
+    public delegate object PassObjectAndReturn(object i);
+
     public class Globals
     {
         public static int screenHeight, screenWidth;
@@ -25,6 +28,7 @@ namespace top_down_shooter
 
         public static McKeyboard keyboard;
         public static McMouseControl mouse;
+        public static GameTime gameTime;
 
         // Distance formula - there is actually a built in distance function, but this is what it would be if there wasn't one
         public static float GetDistance(Vector2 pos, Vector2 target)

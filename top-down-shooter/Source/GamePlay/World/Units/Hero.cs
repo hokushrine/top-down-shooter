@@ -14,13 +14,15 @@ using Microsoft.Xna.Framework.Media;
 namespace top_down_shooter
 {
     // Hero is drawn on the screen, so Basic2d must be inherited
-    public class Hero : Basic2d
+    public class Hero : Unit
     {
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
         public float speed;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
         public Hero(string PATH, Vector2 POS, Vector2 DIMS) : base(PATH, POS, DIMS)
         {
-            speed = 10;
+            speed = 2.0f;
         }
 
         // Ifs allow for diagonal movement, if-else will prevent diagonal movement
@@ -45,6 +47,11 @@ namespace top_down_shooter
             }
 
             rotation = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y));
+
+            if(Globals.mouse.LeftClick())
+            {
+                GameGlobals.PassProjectile(new Fireball(new Vector2(pos.X, pos.Y), this, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y)));
+            }
             base.Update();
         }
 
