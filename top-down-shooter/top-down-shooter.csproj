@@ -44,11 +44,13 @@
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Engine\Basic2d.cs" />
-    <Compile Include="Source\Engine\Globals.cs" />
     <Compile Include="Source\Engine\Input\McKey.cs" />
     <Compile Include="Source\Engine\Input\McKeyboard.cs" />
+    <Compile Include="Source\Engine\Input\McMouseControl.cs" />
     <Compile Include="Source\GamePlay\World\Hero.cs" />
     <Compile Include="Source\GamePlay\World\World.cs" />
+    <Compile Include="Source\Globals.cs" />
+    <Compile Include="Source\Globals.Old.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -64,6 +66,9 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
     <Content Include="Content\2d\Hero.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\2d\Misc\CursorArrow.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

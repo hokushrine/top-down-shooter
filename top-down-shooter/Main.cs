@@ -21,6 +21,7 @@ namespace top_down_shooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Basic2d cursor;
         World world;
 
         public Main()
@@ -53,8 +54,11 @@ namespace top_down_shooter
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            cursor = new Basic2d("2d\\Misc\\CursorArrow", new Vector2(0, 0), new Vector2(28, 28));
             Globals.keyboard = new McKeyboard();
-           world = new World();
+            Globals.mouse = new McMouseControl();
+            world = new World();
         }
 
         /// <summary>
@@ -80,6 +84,8 @@ namespace top_down_shooter
             Globals.keyboard.Update();
             world.Update();
             Globals.keyboard.UpdateOld();
+            Globals.mouse.Update();
+            Globals.mouse.UpdateOld();
 
             base.Update(gameTime);
         }
@@ -95,8 +101,9 @@ namespace top_down_shooter
             // TODO: Add your drawing code here
 
             Globals.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            world.Draw();
+            world.Draw(Vector2.Zero);
 
+            cursor.Draw(new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y), new Vector2(0, 0)); // creating a new mouse because using the same variable will cause errors in future
             Globals.spriteBatch.End();
 
             base.Draw(gameTime);

@@ -15,6 +15,7 @@ namespace top_down_shooter
 {
     public class Basic2d
     {
+        public float rotation;
         public Vector2 pos, dims;
         public Texture2D myModel;
 
@@ -31,11 +32,11 @@ namespace top_down_shooter
 
         }
 
-        public virtual void Draw()
+        public virtual void Draw(Vector2 OFFSET)
         {
             if(myModel != null)
             {
-                /* Draw takes in a Texture2D(myModel), a rectangle displayed at the positions listed, with dimensions determining height and width
+                /* Draw takes in a Texture2D (myModel), a rectangle displayed at the positions listed, with dimensions determining height and width
                  * null allows us to use only a piece of a picture if we want to
                  * Putting any other color than white will tint the picture
                  * 0.0f refers to rotation - will revisit later
@@ -43,8 +44,19 @@ namespace top_down_shooter
                  *  - We are currently drawing from the middle due to the divide by two
                  *  SpriteEffects is actually pretty inefficient because it is constantly being called, it's better to do it in the constructor
                  *  Final arg refers to layer depth
+                 *  
+                 *  pos.X gives the relative position, offset.x gives the shifted position
                 */
-                Globals.spriteBatch.Draw(myModel, new Rectangle((int)(pos.X), (int)(pos.Y), (int)dims.X, (int)(dims.Y)), null, Color.White, 0.0f, new Vector2(myModel.Bounds.Width / 2, myModel.Bounds.Height / 2), new SpriteEffects(), 0);
+                Globals.spriteBatch.Draw(myModel, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.White, rotation, new Vector2(myModel.Bounds.Width / 2, myModel.Bounds.Height / 2), new SpriteEffects(), 0);
+            }
+        }
+
+        public virtual void Draw(Vector2 OFFSET, Vector2 ORIGIN)
+
+        {
+            if (myModel != null)
+            {
+                Globals.spriteBatch.Draw(myModel, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.White, rotation, new Vector2(ORIGIN.X, ORIGIN.Y), new SpriteEffects(), 0);
             }
         }
     }

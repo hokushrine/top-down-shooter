@@ -16,36 +16,41 @@ namespace top_down_shooter
     // Hero is drawn on the screen, so Basic2d must be inherited
     public class Hero : Basic2d
     {
+        public float speed;
+
         public Hero(string PATH, Vector2 POS, Vector2 DIMS) : base(PATH, POS, DIMS)
         {
-            
+            speed = 10;
         }
 
         // Ifs allow for diagonal movement, if-else will prevent diagonal movement
         public override void Update()
         {
+            // Originally pos - 1 (one pixel/spac)
             if(Globals.keyboard.GetPress("A"))
             {
-                pos = new Vector2(pos.X - 1, pos.Y);
+                pos = new Vector2(pos.X - speed, pos.Y);
             }
             if (Globals.keyboard.GetPress("D"))
             {
-                pos = new Vector2(pos.X + 1, pos.Y);
+                pos = new Vector2(pos.X + speed, pos.Y);
             }
             if (Globals.keyboard.GetPress("W"))
             {
-                pos = new Vector2(pos.X, pos.Y -1);
+                pos = new Vector2(pos.X, pos.Y - speed);
             }
             if (Globals.keyboard.GetPress("S"))
             {
-                pos = new Vector2(pos.X, pos.Y + 1);
+                pos = new Vector2(pos.X, pos.Y + speed);
             }
+
+            rotation = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y));
             base.Update();
         }
 
-        public override void Draw()
+        public override void Draw(Vector2 OFFSET)
         {
-            base.Draw();
+            base.Draw(OFFSET);
         }
     }
 }
