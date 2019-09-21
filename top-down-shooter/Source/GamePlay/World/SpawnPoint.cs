@@ -14,22 +14,27 @@ using Microsoft.Xna.Framework.Media;
 namespace top_down_shooter
 {
     // Unit is drawn on the screen, so Basic2d must be inherited
-    public class Unit : Basic2d
+    public class SpawnPoint : Basic2d
     {
         public bool dead;
         public float speed, hitDist;
+        public McTimer spawnTimer = new McTimer(2200);
 
-        public Unit(string PATH, Vector2 POS, Vector2 DIMS) : base(PATH, POS, DIMS)
+        public SpawnPoint(string PATH, Vector2 POS, Vector2 DIMS) : base(PATH, POS, DIMS)
         {
             dead = false;
-            speed = 2.0f;
             hitDist = 35.0f;
         }
 
         // Ifs allow for diagonal movement, if-else will prevent diagonal movement
         public override void Update(Vector2 OFFSET)
         {
-
+            spawnTimer.UpdateTimer();
+            if(spawnTimer.Test())
+            {
+                SpawnMob();
+                spawnTimer.ResetToZero();
+            }
             base.Update(OFFSET);
         }
 
@@ -38,6 +43,10 @@ namespace top_down_shooter
             dead = true;
         }
 
+        public virtual void SpawnMob()
+        {
+            GameGlobals.PassMob(new Imp(new Vector2(pos.X, pos.Y)));
+        }
         public override void Draw(Vector2 OFFSET)
         {
             base.Draw(OFFSET);

@@ -1,13 +1,11 @@
-#region Includes
+﻿#region Includes
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -15,17 +13,20 @@ using Microsoft.Xna.Framework.Media;
 
 namespace top_down_shooter
 {
-    public class Fireball : Projectile2d
+    public class Imp : Mob
     {
-        public Fireball(Vector2 POS, Unit OWNER, Vector2 TARGET)
-            : base("2d\\Projectiles\\Fireball", POS, new Vector2(20, 20), OWNER, TARGET)
+
+
+        public Imp(Vector2 POS)
+            : base("2d\\Units\\Mobs\\Imp", POS, new Vector2(40, 40))
         {
-            
+            speed = 1.0f;
         }
 
-        public override void Update(Vector2 OFFSET, List<Unit> UNITS)
+        public override void Update(Vector2 OFFSET, Hero HERO)
         {
-            base.Update(OFFSET, UNITS);
+
+            base.Update(OFFSET, HERO);
         }
 
 

@@ -18,6 +18,6 @@ namespace top_down_shooter
 {
     public class GameGlobals
     {
-        public static PassObject PassProjectile;
+        public static PassObject PassProjectile, PassMob;
     }
 }

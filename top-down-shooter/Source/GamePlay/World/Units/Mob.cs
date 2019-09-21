@@ -13,29 +13,24 @@ using Microsoft.Xna.Framework.Media;
 
 namespace top_down_shooter
 {
-    // Unit is drawn on the screen, so Basic2d must be inherited
-    public class Unit : Basic2d
+    public class Mob : Unit
     {
-        public bool dead;
-        public float speed, hitDist;
 
-        public Unit(string PATH, Vector2 POS, Vector2 DIMS) : base(PATH, POS, DIMS)
+
+        public Mob(string PATH, Vector2 POS, Vector2 DIMS) : base(PATH, POS, DIMS)
         {
-            dead = false;
             speed = 2.0f;
-            hitDist = 35.0f;
         }
 
-        // Ifs allow for diagonal movement, if-else will prevent diagonal movement
-        public override void Update(Vector2 OFFSET)
+        public virtual void Update(Vector2 OFFSET, Hero HERO)
         {
-
-            base.Update(OFFSET);
+            AI(HERO);
         }
 
-        public virtual void GetHit()
+        public virtual void AI(Hero HERO)
         {
-            dead = true;
+            pos += Globals.RadialMovement(HERO.pos, pos, speed);
+            rotation = Globals.RotateTowards(pos, HERO.pos); // first arg is position of the mob
         }
 
         public override void Draw(Vector2 OFFSET)

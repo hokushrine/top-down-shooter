@@ -16,17 +16,13 @@ namespace top_down_shooter
     // Hero is drawn on the screen, so Basic2d must be inherited
     public class Hero : Unit
     {
-#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
-        public float speed;
-#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
-
         public Hero(string PATH, Vector2 POS, Vector2 DIMS) : base(PATH, POS, DIMS)
         {
-            speed = 2.0f;
+            speed = 9.0f;
         }
 
         // Ifs allow for diagonal movement, if-else will prevent diagonal movement
-        public override void Update()
+        public override void Update(Vector2 OFFSET)
         {
             // Originally pos - 1 (one pixel/spac)
             if(Globals.keyboard.GetPress("A"))
@@ -52,7 +48,7 @@ namespace top_down_shooter
             {
                 GameGlobals.PassProjectile(new Fireball(new Vector2(pos.X, pos.Y), this, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y)));
             }
-            base.Update();
+            base.Update(OFFSET);
         }
 
         public override void Draw(Vector2 OFFSET)
